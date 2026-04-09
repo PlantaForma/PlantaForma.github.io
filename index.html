@@ -4,47 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlantaForma | Links</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --bg-color: #0a0a0a;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --accent-color: #ffcc00;
+            --bg-color: #050605;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --accent-color: #00ff88;
             --text-main: #ffffff;
-            --text-sub: #a0a0a0;
+            --text-sub: #888888;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Poppins', -apple-system, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 50px 20px;
+            padding: 60px 20px;
             margin: 0;
             min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 255, 136, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
 
+        /* --- アニメーションの設定 --- */
+        
+        /* 1. ロゴの初期状態（中央・巨大）から移動するアニメーション */
         .profile {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
+            animation: logoEntryPoint 1.2s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+        }
+
+        @keyframes logoEntryPoint {
+            0% {
+                transform: translateY(35vh) scale(1.5); /* 画面中央付近で大きく表示 */
+                filter: blur(10px);
+                opacity: 0;
+            }
+            30% {
+                filter: blur(0px);
+                opacity: 1;
+            }
+            70% {
+                transform: translateY(35vh) scale(1.5); /* 一瞬中央で止まる */
+            }
+            100% {
+                transform: translateY(0) scale(1); /* 本来の位置へ */
+            }
         }
 
         .logo {
             width: 100%;
             max-width: 300px;
             height: auto;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.2));
         }
 
         .tagline {
-            font-size: 13px;
+            font-size: 11px;
             color: var(--text-sub);
-            letter-spacing: 0.1em;
+            letter-spacing: 0.3em;
             text-transform: uppercase;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeIn 0.5s ease 1.2s forwards; /* ロゴ移動後に表示 */
         }
 
+        /* 2. リンクカードが下からふわっと出るアニメーション */
         .link-container {
             width: 100%;
             max-width: 420px;
@@ -52,33 +85,61 @@
 
         .link-card {
             background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 18px 24px;
-            margin-bottom: 16px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 4px;
+            padding: 22px 28px;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
             text-decoration: none;
             color: var(--text-main);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
+            position: relative;
+            
+            /* 初期状態は透明・下配置 */
+            opacity: 0;
+            transform: translateY(30px);
+            animation: cardReveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
+        /* 各カードの登場タイミングをずらす */
+        .link-card:nth-child(1) { animation-delay: 1.3s; }
+        .link-card:nth-child(2) { animation-delay: 1.4s; }
+        .link-card:nth-child(3) { animation-delay: 1.5s; }
+        .link-card:nth-child(4) { animation-delay: 1.6s; }
+
+        @keyframes cardReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* ホバー演出 */
         .link-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 255, 136, 0.3);
             transform: scale(1.02);
         }
 
         .link-card i {
-            font-size: 22px;
-            margin-right: 20px;
-            color: var(--accent-color);
+            font-size: 20px;
+            margin-right: 24px;
+            color: #555;
             width: 28px;
             text-align: center;
+            transition: 0.3s;
         }
 
-        .link-text {
-            flex-grow: 1;
+        .link-card:hover i {
+            color: var(--accent-color);
+            filter: drop-shadow(0 0 8px var(--accent-color));
         }
 
         .link-text span {
@@ -89,14 +150,15 @@
 
         .link-text small {
             display: block;
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-sub);
-            margin-top: 2px;
+            margin-top: 5px;
+            text-transform: uppercase;
         }
 
         .arrow {
             font-size: 12px;
-            color: #333;
+            color: #222;
         }
     </style>
 </head>
@@ -133,7 +195,7 @@
             <i class="fa-solid fa-cube"></i>
             <div class="link-text">
                 <span>MakerWorld</span>
-                <small>Get 3D Models (HEX-SYSTEM, etc.)</small>
+                <small>Get 3D Models</small>
             </div>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
@@ -143,7 +205,7 @@
             <i class="fa-solid fa-store"></i>
             <div class="link-text">
                 <span>Creema Shop</span>
-                <small>Handmade Low-Poly Bonsai & More</small>
+                <small>Handmade Works</small>
             </div>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
