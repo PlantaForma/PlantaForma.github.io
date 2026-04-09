@@ -22,7 +22,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 60px 20px;
+            padding: 40px 20px; /* 余計な隙間を削除 */
             margin: 0;
             min-height: 100vh;
             overflow-x: hidden;
@@ -32,39 +32,43 @@
             background-size: 40px 40px;
         }
 
-        /* --- アニメーションの設定 --- */
-        
-        /* 1. ロゴの初期状態（中央・巨大）から移動するアニメーション */
+        /* --- ロゴのアニメーション修正 --- */
         .profile {
             text-align: center;
-            margin-bottom: 50px;
-            animation: logoEntryPoint 1.2s cubic-bezier(0.85, 0, 0.15, 1) forwards;
-        }
-
-        @keyframes logoEntryPoint {
-            0% {
-                transform: translateY(35vh) scale(1.5); /* 画面中央付近で大きく表示 */
-                filter: blur(10px);
-                opacity: 0;
-            }
-            30% {
-                filter: blur(0px);
-                opacity: 1;
-            }
-            70% {
-                transform: translateY(35vh) scale(1.5); /* 一瞬中央で止まる */
-            }
-            100% {
-                transform: translateY(0) scale(1); /* 本来の位置へ */
-            }
+            margin-bottom: 40px;
+            width: 100%;
+            height: 120px; /* ヘッダーの高さを固定 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .logo {
             width: 100%;
-            max-width: 300px;
+            max-width: 280px;
             height: auto;
-            margin-bottom: 12px;
             filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.2));
+            /* 画像単体で動かすことでレイアウト崩れを防ぐ */
+            animation: logoFixedMove 1.1s cubic-bezier(0.8, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes logoFixedMove {
+            0% {
+                transform: translateY(35vh) scale(1.4);
+                opacity: 0;
+                filter: blur(10px);
+            }
+            30% {
+                opacity: 1;
+                filter: blur(0px);
+            }
+            70% {
+                transform: translateY(35vh) scale(1.4);
+            }
+            100% {
+                transform: translateY(0) scale(1); /* 確実に0の位置に固定 */
+            }
         }
 
         .tagline {
@@ -73,14 +77,15 @@
             letter-spacing: 0.3em;
             text-transform: uppercase;
             font-weight: 300;
+            margin-top: 10px;
             opacity: 0;
-            animation: fadeIn 0.5s ease 1.2s forwards; /* ロゴ移動後に表示 */
+            animation: fadeIn 0.4s ease 1.1s forwards;
         }
 
-        /* 2. リンクカードが下からふわっと出るアニメーション */
+        /* --- リンクカード --- */
         .link-container {
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
         }
 
         .link-card {
@@ -89,77 +94,38 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 4px;
-            padding: 22px 28px;
-            margin-bottom: 18px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             text-decoration: none;
             color: var(--text-main);
             transition: all 0.3s ease;
-            position: relative;
-            
-            /* 初期状態は透明・下配置 */
             opacity: 0;
-            transform: translateY(30px);
-            animation: cardReveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            transform: translateY(20px);
+            animation: cardReveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
-        /* 各カードの登場タイミングをずらす */
-        .link-card:nth-child(1) { animation-delay: 1.3s; }
-        .link-card:nth-child(2) { animation-delay: 1.4s; }
-        .link-card:nth-child(3) { animation-delay: 1.5s; }
-        .link-card:nth-child(4) { animation-delay: 1.6s; }
+        /* カードの登場タイミング */
+        .link-card:nth-child(1) { animation-delay: 1.2s; }
+        .link-card:nth-child(2) { animation-delay: 1.3s; }
+        .link-card:nth-child(3) { animation-delay: 1.4s; }
+        .link-card:nth-child(4) { animation-delay: 1.5s; }
 
-        @keyframes cardReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        @keyframes cardReveal { to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { to { opacity: 1; } }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
-        /* ホバー演出 */
+        /* ホバー */
         .link-card:hover {
             background: rgba(255, 255, 255, 0.05);
             border-color: rgba(0, 255, 136, 0.3);
             transform: scale(1.02);
         }
-
-        .link-card i {
-            font-size: 20px;
-            margin-right: 24px;
-            color: #555;
-            width: 28px;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        .link-card:hover i {
-            color: var(--accent-color);
-            filter: drop-shadow(0 0 8px var(--accent-color));
-        }
-
-        .link-text span {
-            display: block;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .link-text small {
-            display: block;
-            font-size: 10px;
-            color: var(--text-sub);
-            margin-top: 5px;
-            text-transform: uppercase;
-        }
-
-        .arrow {
-            font-size: 12px;
-            color: #222;
-        }
+        .link-card i { font-size: 18px; margin-right: 20px; color: #555; width: 24px; text-align: center; }
+        .link-card:hover i { color: var(--accent-color); filter: drop-shadow(0 0 5px var(--accent-color)); }
+        .link-text span { display: block; font-size: 15px; font-weight: 600; }
+        .link-text small { display: block; font-size: 10px; color: var(--text-sub); margin-top: 3px; }
+        .arrow { font-size: 12px; color: #222; margin-left: auto; }
     </style>
 </head>
 <body>
@@ -170,43 +136,24 @@
     </div>
 
     <div class="link-container">
-        <!-- 1. X (Twitter) -->
         <a href="https://x.com/Afk_Ty" class="link-card" target="_blank">
             <i class="fa-brands fa-x-twitter"></i>
-            <div class="link-text">
-                <span>X (Twitter)</span>
-                <small>@Afk_Ty | Latest Updates</small>
-            </div>
+            <div class="link-text"><span>X (Twitter)</span><small>@Afk_Ty | Latest Updates</small></div>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
-
-        <!-- 2. YouTube -->
         <a href="https://youtube.com/@snob_PF" class="link-card" target="_blank">
             <i class="fa-brands fa-youtube"></i>
-            <div class="link-text">
-                <span>YouTube</span>
-                <small>@snob_PF | Vlogs & Reviews</small>
-            </div>
+            <div class="link-text"><span>YouTube</span><small>@snob_PF | Vlogs & Reviews</small></div>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
-
-        <!-- 3. MakerWorld -->
         <a href="https://makerworld.com/ja/@PlantaForma" class="link-card" target="_blank">
             <i class="fa-solid fa-cube"></i>
-            <div class="link-text">
-                <span>MakerWorld</span>
-                <small>Get 3D Models</small>
-            </div>
+            <div class="link-text"><span>MakerWorld</span><small>Get 3D Models</small></div>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
-
-        <!-- 4. Creema -->
         <a href="https://www.creema.jp/c/PlantaForma" class="link-card" target="_blank">
             <i class="fa-solid fa-store"></i>
-            <div class="link-text">
-                <span>Creema Shop</span>
-                <small>Handmade Works</small>
-            </div>
+            <div class="link-text"><span>Creema Shop</span><small>Handmade Works</small></div>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
     </div>
