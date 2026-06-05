@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --bg-color: #f2f3f2; /* 洗練された明るいライトグレー */
-            --card-bg: #ffffff; /* 高級感のある純白のカード */
-            --accent-color: #2c3e2c; /* 深みのあるディープボタニカルグリーン */
-            --hover-border: #8c9c8c; /* ホバー時の柔らかな線の色 */
-            --text-main: #1a1a1a; /* 締まりのある上品な黒 */
-            --text-sub: #666666; /* 読みやすい中間グレー */
-            --header-spacing: 80px; /* プロ仕様のゆったりとした上部余白 */
+            --bg-color: #bbbfbb; 
+            --card-bg: #ffffff; 
+            --accent-color: #2c3e2c; 
+            --hover-border: #7a8a7a; 
+            --text-main: #1a1a1a; 
+            --text-sub: #555555; 
+            --header-spacing: 80px; 
         }
 
         body {
@@ -28,10 +28,9 @@
             margin: 0;
             min-height: 100vh;
             overflow-x: hidden;
-            /* 明るい背景に美しく馴染む極薄のグリッドライン */
             background-image: 
-                linear-gradient(rgba(44, 62, 44, 0.012) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(44, 62, 44, 0.012) 1px, transparent 1px);
+                linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px);
             background-size: 50px 50px;
         }
 
@@ -51,8 +50,7 @@
             width: 100%;
             max-width: 220px;
             height: auto;
-            filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.04));
-            /* 中央からヘッダー位置へ移動するアニメーション */
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.06));
             animation: logoEntryPoint 1.2s cubic-bezier(0.8, 0, 0.2, 1) forwards;
         }
 
@@ -93,8 +91,8 @@
 
         .link-card {
             background: var(--card-bg);
-            border: 1px solid rgba(0, 0, 0, 0.04);
-            border-radius: 2px; /* ミニマルさを際立たせるシャープな角 */
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            border-radius: 2px; 
             padding: 22px 26px;
             margin-bottom: 20px;
             display: flex;
@@ -105,14 +103,14 @@
             opacity: 0;
             transform: translateY(20px);
             animation: cardReveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.015);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
         }
 
-        /* タイポを修正し、4つのカードが綺麗に時間差で出るように設定 */
         .link-card:nth-child(1) { animation-delay: 1.5s; }
         .link-card:nth-child(2) { animation-delay: 1.6s; }
         .link-card:nth-child(3) { animation-delay: 1.7s; }
         .link-card:nth-child(4) { animation-delay: 1.8s; }
+        .link-card:nth-child(5) { animation-delay: 1.9s; }
 
         @keyframes cardReveal {
             to { opacity: 1; transform: translateY(0); }
@@ -122,17 +120,16 @@
             to { opacity: 1; }
         }
 
-        /* ホバー時の洗練された浮遊感 */
         .link-card:hover {
             border-color: var(--hover-border);
             transform: translateY(-3px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
         }
 
         .link-card i {
             font-size: 18px;
             margin-right: 24px;
-            color: #888888;
+            color: #777777;
             width: 20px;
             text-align: center;
             transition: 0.4s;
@@ -160,7 +157,7 @@
 
         .arrow {
             font-size: 10px;
-            color: #dddddd;
+            color: #cccccc;
             margin-left: auto;
             transition: 0.4s;
         }
@@ -179,17 +176,27 @@
     </div>
 
     <div class="link-container">
-        <!-- 1. BOOTH (最上部に配置) -->
+        <!-- 1. BOOTH (English表記に変更) -->
         <a href="https://plantaforma.booth.pm/" class="link-card" target="_blank">
             <i class="fa-solid fa-shop"></i>
             <div class="link-text">
-                <span>BOOTH Shop</span>
+                <span>Online Shop</span>
                 <small>Original Products & Data</small>
             </div>
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
 
-        <!-- 2. X (Twitter) -->
+        <!-- 2. Instagram -->
+        <a href="https://www.instagram.com/sn0l3?igsh=MTNhcnFlN3JsY21qZA%3D%3D&utm_source=qr" class="link-card" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+            <div class="link-text">
+                <span>Instagram</span>
+                <small>Photos & Stories</small>
+            </div>
+            <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
+        </a>
+
+        <!-- 3. X (Twitter) -->
         <a href="https://x.com/Afk_Ty" class="link-card" target="_blank">
             <i class="fa-brands fa-x-twitter"></i>
             <div class="link-text">
@@ -199,7 +206,7 @@
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
 
-        <!-- 3. YouTube -->
+        <!-- 4. YouTube -->
         <a href="https://youtube.com/@snob_PF" class="link-card" target="_blank">
             <i class="fa-brands fa-youtube"></i>
             <div class="link-text">
@@ -209,7 +216,7 @@
             <span class="arrow"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
 
-        <!-- 4. MakerWorld -->
+        <!-- 5. MakerWorld -->
         <a href="https://makerworld.com/ja/@PlantaForma" class="link-card" target="_blank">
             <i class="fa-solid fa-cube"></i>
             <div class="link-text">
